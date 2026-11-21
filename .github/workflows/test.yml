@@ -1,0 +1,11 @@
+name: probes
+on: [push, pull_request]
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      # 门必须能红：run_all.sh 同时跑三个 --selftest 与两个 fixture（坏基线必须 exit 3）
+      - run: bash tests/run_all.sh
